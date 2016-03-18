@@ -32,3 +32,23 @@ body{
 	background-position-x: center;
 	color:white;
 }
+
+.artwell{
+	opacity:0.85;
+	border-width: 1px;
+	border-color: #4489BC;
+}
+
+.nytext{
+	color: black;
+	text-align: center;
+}
+
+#sidebar{
+	opacity: 0.0;
+}
+
+#sidetitle{
+	color: black;
+	text-align: center;
+}

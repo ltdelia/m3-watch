@@ -13,6 +13,9 @@
 	<!--jQuery-->
 	<script src="https://code.jquery.com/jquery-2.2.1.min.js"></script>
 
+	<!-- Firebase -->
+	<script src="https://cdn.firebase.com/js/client/2.4.1/firebase.js"></script>
+
 	<title>Bootstrap Test</title>
 </head>
 <body>
@@ -35,24 +38,34 @@
 		<div class="col-lg-6 col-lg-offset-2">
 			<div class="input-group">
   				<span class="glyphicon glyphicon-search input-group-addon" id="basic-addon1"></span>
-  					<input type="text" class="form-control" placeholder="Volkswagen" aria-describedby="basic-addon1">
+  					<input id="searchterm" type="text" class="form-control" placeholder="Volkswagen" aria-describedby="basic-addon1">
   			</div>
   		</div>
   		<div class="col-lg-3">
-  			<button class="btn btn-default" type="submit">Find</button>
+  			<button id="search" class="btn btn-default" type="submit">Find</button>
 		</div>
 	</div>
 	</div>
 </div>
+
+<div class="row">
+	<div class="col-lg-4">
+		<div class="well artwell" id="sidebar">
+			<h1 id="sidetitle" >Keywords</h1>
+		</div>
+	</div>
+	<div class="col-lg-8">
+		<div id="results"></div>
+	</div>
+</div>
+
 </div>
 
 <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
 
 <script src="assets/js/bootstrap.js"></script>
-<script>
-
-</script>
+<script src="assets/js/app.js"></script>
 
 
 </body>
