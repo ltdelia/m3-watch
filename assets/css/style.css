@@ -60,6 +60,10 @@ body{
 .keytitle{
 	font-style: strong;
 }
+
+.row{
+	margin: 20px;
+}
 #sidebar{
 	opacity: 0.0;
 }
