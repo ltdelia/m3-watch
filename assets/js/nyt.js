@@ -49,6 +49,7 @@ $("#search").click(function search(){
     }
     
     var keyarr = [];
+    var uniquekeyarr = [];
     
     function displayResult() {
       
@@ -92,7 +93,8 @@ $("#search").click(function search(){
       var keydivinside = $("<div class='card-content black-text'>");
       var keydivtitle = $("<span class='card-title keytitle'> Keywords </span>")
       var contentKeyword = $("<p class='nytext'>");
-      contentKeyword.text(keyarr.toString());
+      var keystring = uniquekeyarr.toString();
+      contentKeyword.text(keystring);
 
       $('#keyword').animate({opacity: 0.85});
       keydivinside.append(keydivtitle).append(contentKeyword);
@@ -136,8 +138,10 @@ $("#search").click(function search(){
               result.keyword = response.response.docs[i].keywords[j].value;
               console.log(result.keyword);
               keyarr.push(result.keyword);
-              console.log(keyarr);
-
+              $.each(keyarr, function(i, el){
+                if($.inArray(el, uniquekeyarr) === -1) uniquekeyarr.push(el);
+              });
+              console.log(uniquekeyarr);
             }
             displayResult();
           }
