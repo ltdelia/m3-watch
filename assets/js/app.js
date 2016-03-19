@@ -1,5 +1,5 @@
 $('#search').on('click', function(){
-	$('.body_content').empty();
+	$('.body_content').hide();
 	$('.navbar-fixed').html("<nav>"+
 							"<div class='nav-wrapper teal lighten-2'>"+
 							"<form>"+

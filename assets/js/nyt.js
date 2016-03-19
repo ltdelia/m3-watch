@@ -1,8 +1,12 @@
 $(document).ready(function(){
 
+//var searchTerm = $('.searchterm').val().clone();
+
 $("#search").click(function search(){
-	
-	  var searchTerm = $("#searchterm").val();
+
+    $('#results').empty();
+	  
+	  var searchTerm = $(".searchterm").val();
     var searchTermCall = "q=" + searchTerm;
 
     var limit = $("#limit").val();
@@ -39,7 +43,7 @@ $("#search").click(function search(){
       number: "",
       headline: "",
       byline: "",
-      section: "",
+      preview: "",
       date: "",
       link: ""
     }
@@ -48,29 +52,32 @@ $("#search").click(function search(){
     
     function displayResult() {
       
-      var div = $("<div class='well artwell'>");
-      var keydiv = $("<div class='well artwell'>");
+      var div = $("<div class='card artcard z-depth-2'>");
+      var divinside = $("<div class='card-content black-text'>");
+      var divaction = $("<div class='card-action'>");
 
       var spanNumber = $('<span>');
       spanNumber.addClass('label label-primary');
       spanNumber.text(result.number);
 
-      var header = $("<h3 class='nytext'>");
+      var header = $("<span class='card-title'> " + result.headline + "</span>");
       header.text(result.headline);
 
       var contentByline = $("<p class='nytext'>");
       contentByline.text(result.byline);
 
       var contentSection = $("<p class='nytext'>");
-      contentSection.text(result.section);
+      contentSection.text(result.preview);
 
       var contentDate = $("<p class='nytext'>");
       contentDate.text(result.date);
 
-      var contentLink = $("<p class='nytext'>");
-      contentLink.text(result.link)
+      var contentLink = $("<a href = " + result.link + " + " + "target='_blank'> Read More </a>");
+      contentLink.text('Read More')
 
-      div.append(spanNumber).append(header).append(contentByline).append(contentSection).append(contentDate).append(contentLink);
+      div.append(divinside).append(divaction);
+      divinside.append(contentDate).append(header).append(contentByline).append(contentSection);
+      divaction.append(contentLink);
 
       $('#results').append(div);
       $('#recent').animate({opacity: 0.85});
@@ -79,11 +86,19 @@ $("#search").click(function search(){
 
     function displayKey() {
 
-      var contentKeyword = $("<h4 class='nytext'>");
+      $(keydiv).empty();
+
+      var keydiv = $("<div class='card artcard z-depth-2'>");
+      var keydivinside = $("<div class='card-content black-text'>");
+      var keydivtitle = $("<span class='card-title keytitle'> Keywords </span>")
+      var contentKeyword = $("<p class='nytext'>");
       contentKeyword.text(keyarr.toString());
 
-      $('#sidebar').animate({opacity: 0.85});
-      $('#sidebar').append(contentKeyword);
+      $('#keyword').animate({opacity: 0.85});
+      keydivinside.append(keydivtitle).append(contentKeyword);
+      keydiv.append(keydivinside);
+      $('#keyword').append(keydiv);
+      $('#results').prepend("<h4 class='nytitle'>Top News Stories for " + searchTerm + "</h4>");
 
     }
 
@@ -106,10 +121,11 @@ $("#search").click(function search(){
             result.byline = response.response.docs[i].byline.original;
             console.log(result.byline);
 
-            result.section = response.response.docs[i].section_name;
-            console.log("Section: " + result.section);
+            result.preview = response.response.docs[i].lead_paragraph;
+            console.log("preview: " + result.preview);
 
-            result.date = response.response.docs[i].pub_date;
+            result.datebef = response.response.docs[i].pub_date;
+            result.date = moment(result.datebef).format('MMMM D, YYYY');
             console.log(result.date);
 
             result.link = response.response.docs[i].web_url;
@@ -138,14 +154,21 @@ $("#search").click(function search(){
     	ARRR.push({searchterm: var1, startYear: var2, endYear: var3})
     }
 
+      var recentcard = $("<div class='card artcard z-depth-3'>");
+      var recenttitle = $("<span class='card-title keytitle'> Recent Searches </span>");
+      var recentinside = $("<div class='card-content black-text rectext'>");
+      recentinside.append(recenttitle);
+
     ARRR.on("child_added", function(snapshot){
+    function test() {
+      alert("Yoo");
+    }
+    	var info = snapshot.val();
+    	var search = "<a href='javascript:void(0)' onclick='test()'>" + info.searchterm + "</a>";
 
-    	var newRow = snapshot.val();
-    	var search = newRow.searchterm;
-    	var start = newRow.startYear;
-    	var end = newRow.endYear;
-
-    	$("#searchTable").append("<tr class='clickable-row' ><td id='newSearch'>" + search + "</td><td>" + start + "</td><td>" + end + "</td></tr>")
+      recentinside.append("<br>" + search);
+      recentcard.append(recentinside);
+      $("#recent").append(recentcard);
     });
 
 $(".clickable-row").click(function() {
@@ -155,5 +178,7 @@ $(".clickable-row").click(function() {
 $("#ClearButton").click(function(){
 	$(".results").empty();  
 });
+
+return false;
 
 })
