@@ -10,7 +10,7 @@ var stockInfo = {
   changePercent: ""
 };
 
-// Initialize search bar
+// Initialize search bar ### This is now done in app.js
 // document.getElementById("searchbar").onsubmit = function() {
 //   search();
 // };
@@ -22,7 +22,7 @@ function search() {
 
   // Get user string input
   stockInfo.input = $('#search').val().trim();
-  console.log(stockInfo.input);
+  console.log("User searched for: " + stockInfo.input);
 
   // Clear input
   $('#search').val("");
@@ -66,18 +66,35 @@ function getSymbol() {
 
     } else {
 
-      // Get and set values
-      stockInfo.name = data.ResultSet.Result[0].name;
-      stockInfo.symbol = data.ResultSet.Result[0].symbol;
-      stockInfo.exchange = data.ResultSet.Result[0].exchDisp;
+      for (i = 0; i < data.ResultSet.Result.length; i++) {
 
-      // ignore: this is for the markit url
-      // stockInfo.name = data[0].Name;
-      // stockInfo.symbol = data[0].Symbol;
-      // stockInfo.exchange = data[0].Exchange;
+        // Check if stock symbol has "."
+        var string = data.ResultSet.Result[i].symbol;
 
-      // Use stock symbol to search for price
-      getPrice();
+        if (string.indexOf('.') === -1) {
+
+          console.log("Symbol returned: " + string);
+
+          // Get and set values
+          stockInfo.name = data.ResultSet.Result[i].name;
+          stockInfo.symbol = data.ResultSet.Result[i].symbol;
+          stockInfo.exchange = data.ResultSet.Result[i].exchDisp;
+
+          // ignore: this is for the markit url
+          // stockInfo.name = data[0].Name;
+          // stockInfo.symbol = data[0].Symbol;
+          // stockInfo.exchange = data[0].Exchange;
+
+          // Use stock symbol to search for price
+          getPrice();
+
+          // Close loop
+          i = data.ResultSet.Result.length;
+
+        } else {
+          searchFail();
+        }
+      }
     }
   });
 
@@ -167,6 +184,6 @@ function searchFail() {
   $('.sidebar').hide();
 
   $('#status').text("No matches found");
-  $('#query').text(stockInfo.input);
   $('#for').text("for ");
+  $('#query').text(stockInfo.input);
 };
