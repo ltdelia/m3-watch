@@ -48,6 +48,7 @@ body{
 }
 
 .main-content {
+	color: #424242;
 	display: none;
 	position: relative;
 	width: 100%;
@@ -56,7 +57,7 @@ body{
 /*Keep on top */
 
 .sidebar {
-	color: #212121;
+	color: #424242;
 	display: none;
 	opacity: 0.95;
 	position: fixed;
@@ -86,7 +87,7 @@ body{
 
 
 .article-card {
-	color: #212121;
+	color: #424242;
 	opacity: 0.95;
 	padding: 15px;
 	width: 560px;

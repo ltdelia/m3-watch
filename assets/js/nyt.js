@@ -11,7 +11,7 @@ var keyUniqueArr = [];
 
 function getArticles() {
 
-  var searchTerm = stockInfo.input // $('#search').val().trim();
+  var searchTerm = stockInfo.name;
   var searchTermCall = "q=" + searchTerm;
 
   // recent(searchTerm, startYear, endYear);
@@ -115,7 +115,7 @@ function displayArticles() {
   var contentHeadline = $('<span>').addClass('card-title');
   contentHeadline.text(article.headline);
 
-  var contentSection = $('<span>').addClass('article-text');
+  var contentSection = $('<p>').addClass('article-text');
   contentSection.text(article.preview);
 
   var contentDate = $('<p>').attr('id','article-date');
@@ -138,7 +138,7 @@ function displayKeywords() {
   var limit = 6;
   for (i = 0; i < keyUniqueArr.length; i++) {
     if (i < limit) {
-      var keywordTag = $('<div>').addClass('chip');
+      var keywordTag = $('<div>').addClass('chip truncate');
       keywordTag.text(keyUniqueArr[i].toString());
       $('#keywords').append(keywordTag);
     };
