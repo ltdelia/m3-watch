@@ -1,37 +1,63 @@
-.body_content{
-	margin-top:150px;
-}
-
-.jumbotron{
-	opacity:0.65;
-	margin-top:150px;
-}
-
-.input-field label{
+body{
+	background: linear-gradient(
+		rgba(66,189,185,0.45),
+		rgba(66,189,185,0.45)
+	),url(img/training.jpg);
+	background-size: cover;
+	background-position-x: center;
 	color: white;
 }
 
-.input-field input[type=text]:focus {
-     border-bottom: 1px solid white;
-     box-shadow: 0 1px 0 0 #fff;
-   }
-
-.content{
-	background-color:white;
-	color: teal;
+.land_content{
+	position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+	padding: 30px;
 }
 
-body{
-	background:
-	linear-gradient(
-		rgba(66,189,185,0.45),
-		rgba(66,189,185,0.45)
-	),
-	url(training.jpg);
-	background-size:cover;
-	background-position-x: center;
-	color:white;
+/*Stocks*/
+
+#query {
+	font-weight: bold;
+	text-transform: uppercase;
 }
+
+#stockTimestamp:before {
+	content: attr(dash-before);
+}
+
+#stockTimestamp {
+	color: #9e9e9e;
+}
+
+#stockPrice {
+	font-size: 56px;
+	padding-right: 5px;
+}
+
+.posnum{
+  color:#64dd17;
+}
+
+.negnum{
+  color:#f44336;
+}
+
+.main-content {
+	display: none;
+	position: relative;
+	width: 100%;
+}
+
+.stock-card {
+	position: absolute;
+  right: 23px;
+  top: 23px;
+  z-index: 998;
+}
+
+/*NYT Article Results*/
 
 .artcard{
 	opacity:0.75;
@@ -48,7 +74,6 @@ body{
 	color: black;
 	font-size: 100%;
 	overflow: auto;
-
 }
 
 .nytitle{
@@ -79,6 +104,8 @@ body{
 .tcss{
 	color: black;
 }
+
+/*Media Queries*/
 
 @media screen and (max-width:980px){
 	body{
