@@ -1,5 +1,4 @@
 var article = {
-  number: "",
   headline: "",
   byline: "",
   preview: "",
@@ -10,8 +9,6 @@ var article = {
 function getArticles() {
 
   console.log("Searching for articles");
-
-  $('#articles').empty();
   
   var searchTerm = stockInfo.input // $('#search').val().trim();
   var searchTermCall = "q=" + searchTerm;
@@ -33,18 +30,16 @@ function getArticles() {
     // console.log(response);
 
     var limit = 5; 
-    for (var i = 0; i < limit; i++) {
 
-      article.number = i + 1;
-      console.log(article.number);
+    for (var i = 0; i < limit; i++) {
 
       article.headline = response.response.docs[i].headline.main;
       console.log(article.headline);
 
-      article.byline = response.response.docs[i].byline.original;
-      console.log(article.byline);
+      // article.byline = response.response.docs[i].byline.original;
+      // console.log(article.byline);
 
-      article.preview = response.response.docs[i].lead_paragraph;
+      article.preview = response.response.docs[i].snippet;
       console.log("preview: " + article.preview);
 
       article.datebef = response.response.docs[i].pub_date;
@@ -103,8 +98,8 @@ function getArticles() {
 
 function displayArticles() {
     
-  var div = $("<div class='card article-card z-depth-2'>");
-  var divinside = $("<div class='card-content black-text'>");
+  var div = $("<div class='card article-card'>");
+  var divinside = $("<div class='card-content'>");
   var divaction = $("<div class='card-action'>");
 
   var spanNumber = $('<span>');
@@ -114,20 +109,25 @@ function displayArticles() {
   var header = $("<span class='card-title'> " + article.headline + "</span>");
   header.text(article.headline);
 
-  var contentByline = $("<p class='nytext'>");
-  contentByline.text(article.byline);
+  // var contentByline = $("<p class='nytext'>");
+  // contentByline.text(article.byline);
 
   var contentSection = $("<p class='nytext'>");
   contentSection.text(article.preview);
 
-  var contentDate = $("<p class='nytext'>");
+  var contentDate = $("<p>");
+  contentDate.attr('id','article-date');
   contentDate.text(article.date);
 
   var contentLink = $("<a href = " + article.link + " + " + "target='_blank'> Read More </a>");
   contentLink.text('Read More')
 
   div.append(divinside).append(divaction);
-  divinside.append(contentDate).append(header).append(contentByline).append(contentSection);
+  divinside
+    .append(contentDate)
+    .append(header)
+    // .append(contentByline)
+    .append(contentSection);
   divaction.append(contentLink);
 
   $('#articles').append(div);

@@ -37,6 +37,9 @@ function search() {
   $('#stockChange').empty();
   $('#stockChange').removeClass();
   $('#stockChangePercent').removeClass();
+  $('#articles').empty();
+  $('#keywords').empty();
+  $('#recent').empty();
 
   // Start API call
   getSymbol();
@@ -151,6 +154,7 @@ function getPrice() {
 
 function displayInfo() {
   $('.stock-card').show();
+
   
   $('#stockName').text(stockInfo.name);
 
