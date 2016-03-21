@@ -153,23 +153,20 @@ function getPrice() {
 };
 
 function displayInfo() {
-  $('.stock-card').show();
+  $('.sidebar').show();
 
-  
   $('#stockName').text(stockInfo.name);
-
   $('#stockSymbol').text(stockInfo.symbol);
   $('#stockTimestamp').text(stockInfo.timestamp).attr('dash-before',' - ');
-
   $('#stockPrice').text(stockInfo.price);
   $('#stockChange').text(stockInfo.change);
   $('#stockChangePercent').text("(" + stockInfo.changePercent + "%)");
 };
 
 function searchFail() {
-  $('.stock-card').hide();
+  $('.sidebar').hide();
+
   $('#status').text("No matches found");
   $('#query').text(stockInfo.input);
   $('#for').text("for ");
-
 };

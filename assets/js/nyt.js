@@ -6,23 +6,25 @@ var article = {
   link: ""
 };
 
+var keyArr = [];
+var keyUniqueArr = [];
+
 function getArticles() {
 
-  console.log("Searching for articles");
-  
   var searchTerm = stockInfo.input // $('#search').val().trim();
   var searchTermCall = "q=" + searchTerm;
 
   // recent(searchTerm, startYear, endYear);
 
-  var key = "1f7c7f95b1c4310e875bb121e74ccb33:15:74629295";
-  var keyCall = "&api-key=" + key;
+  var sortCall = "&sort=newest";
+  var keyCall = "&api-key=1f7c7f95b1c4310e875bb121e74ccb33:15:74629295";
 
   var urlBase = "http://api.nytimes.com/svc/search/v2/articlesearch.json?";
-  var urlFinal = urlBase + searchTermCall + keyCall;
-  
-  var keyarr = [];
-  var uniquekeyarr = [];
+  var urlFinal = urlBase + searchTermCall + sortCall + keyCall;
+
+  // Clear keyword arrays
+  keyArr = [];
+  keyUniqueArr = [];
   
   $.ajax({url: urlFinal, method: 'GET'}).done(function(response) {
 
@@ -34,33 +36,42 @@ function getArticles() {
     for (var i = 0; i < limit; i++) {
 
       article.headline = response.response.docs[i].headline.main;
-      console.log(article.headline);
+      // console.log(article.headline);
 
       // article.byline = response.response.docs[i].byline.original;
       // console.log(article.byline);
 
       article.preview = response.response.docs[i].snippet;
-      console.log("preview: " + article.preview);
+      // console.log("preview: " + article.preview);
 
       article.datebef = response.response.docs[i].pub_date;
       article.date = moment(article.datebef).format('MMMM D, YYYY');
-      console.log(article.date);
+      // console.log(article.date);
 
       article.link = response.response.docs[i].web_url;
-      console.log(article.link);
+      // console.log(article.link);
 
+      // Compiling keywords
       for (var j = 0; j < response.response.docs[i].keywords.length; j++) {
-        article.keyword = response.response.docs[i].keywords[j].value;
-        console.log(article.keyword);
-        keyarr.push(article.keyword);
-        $.each(keyarr, function(i, el){
-          if($.inArray(el, uniquekeyarr) === -1) uniquekeyarr.push(el);
+
+        var keyword = response.response.docs[i].keywords[j].value;
+        // console.log(keyword);
+
+        keyArr.push(keyword);
+
+        // Check if existing keyword
+        $.each(keyArr, function(i, el) {
+          if ($.inArray(el, keyUniqueArr) === -1) {
+            keyUniqueArr.push(el);
+          }
         });
-        console.log(uniquekeyarr);
-      }
+      };
+      // Append articles to div  
       displayArticles();
-    }
-    // displayKeywords();
+    };
+    // Append keywords to div
+    console.log(keyUniqueArr);
+    displayKeywords();
   });
 };
 
@@ -97,59 +108,39 @@ function getArticles() {
 
 
 function displayArticles() {
-    
-  var div = $("<div class='card article-card'>");
-  var divinside = $("<div class='card-content'>");
-  var divaction = $("<div class='card-action'>");
+  var div = $('<div>').addClass('card article-card');
+  var divinside = $('<div>').addClass('card-content');
+  var divaction = $('<div>').addClass('card-action');
 
-  var spanNumber = $('<span>');
-  spanNumber.addClass('label label-primary');
-  spanNumber.text(article.number);
+  var contentHeadline = $('<span>').addClass('card-title');
+  contentHeadline.text(article.headline);
 
-  var header = $("<span class='card-title'> " + article.headline + "</span>");
-  header.text(article.headline);
-
-  // var contentByline = $("<p class='nytext'>");
-  // contentByline.text(article.byline);
-
-  var contentSection = $("<p class='nytext'>");
+  var contentSection = $('<span>').addClass('article-text');
   contentSection.text(article.preview);
 
-  var contentDate = $("<p>");
-  contentDate.attr('id','article-date');
+  var contentDate = $('<p>').attr('id','article-date');
   contentDate.text(article.date);
 
-  var contentLink = $("<a href = " + article.link + " + " + "target='_blank'> Read More </a>");
-  contentLink.text('Read More')
+  var contentLink = $("<a href = " + article.link + " + " + "target='_blank'>Read More</a>");
 
   div.append(divinside).append(divaction);
   divinside
     .append(contentDate)
-    .append(header)
-    // .append(contentByline)
-    .append(contentSection);
+    .append(contentHeadline)
+    .append(contentSection)
+    ;
   divaction.append(contentLink);
 
   $('#articles').append(div);
-  // $('#recent').animate({opacity: 0.85});
 };
 
 function displayKeywords() {
-
-  $(keydiv).empty();
-
-  var keydiv = $("<div class='card article-card z-depth-2'>");
-  var keydivinside = $("<div class='card-content black-text'>");
-  var keydivtitle = $("<span class='card-title keytitle'> Keywords </span>")
-  var contentKeyword = $("<p class='nytext'>");
-  var keystring = uniquekeyarr.toString();
-  contentKeyword.text(keystring);
-
-  $('#keywords').animate({opacity: 0.85});
-  keydivinside.append(keydivtitle).append(contentKeyword);
-  keydiv.append(keydivinside);
-  $('#keywords').append(keydiv);
-  // $('#news').prepend("<h4 class='nytitle'>Top News Stories for " + searchTerm + "</h4>");
-
+  var limit = 6;
+  for (i = 0; i < keyUniqueArr.length; i++) {
+    if (i < limit) {
+      var keywordTag = $('<div>').addClass('chip');
+      keywordTag.text(keyUniqueArr[i].toString());
+      $('#keywords').append(keywordTag);
+    };
+  };
 };
-

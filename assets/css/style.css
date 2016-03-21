@@ -16,6 +16,7 @@ body{
   left: 50%;
   transform: translate(-50%, -50%);
 	padding: 30px;
+	z-index: 998;
 }
 
 /*Stocks*/
@@ -52,15 +53,29 @@ body{
 	width: 100%;
 }
 
-.stock-card {
+/*Keep on top */
+
+.sidebar {
 	color: #212121;
+	display: none;
 	opacity: 0.95;
 	position: fixed;
   right: 30px;
   top: 90px;
-  /*z-index: 998;*/
-  width: 320px;
+  width: 340px;
   overflow: hidden;
+}
+
+.stock-card {
+  min-height: auto;
+  max-height: 200px;
+  overflow: hidden;
+}
+
+.chip {
+	margin-bottom: 5px;
+	margin-right: 5px;
+	font-size: 12px;
 }
 
 /*NYT Article Results*/
@@ -68,6 +83,7 @@ body{
 #articles {
 	padding-top: 15px;
 }
+
 
 .article-card {
 	color: #212121;
@@ -78,9 +94,10 @@ body{
 
 #article-date {
 	color: #9e9e9e;
+	padding-bottom: 5px;
 }
 
-.nytext{
+.article-text{
 	color: black;
 	font-size: 100%;
 	overflow: auto;
@@ -92,19 +109,8 @@ body{
 	overflow: auto;
 }
 
-.nytitle{
-	color: black;
-}
-
-.keytitle{
-	font-style: strong;
-}
-
 .row{
 	margin: 20px;
-}
-#sidebar{
-	opacity: 0.0;
 }
 
 #recent{
@@ -128,8 +134,7 @@ body{
 		background-size:cover;
 	}
 
-	.stock-card {
-		display: inline-block;
+	.sidebar {
 		position: relative;
 		top: 0;
 		left: 0;
@@ -147,8 +152,7 @@ body{
 		background-size:cover;
 	}
 
-	.stock-card {
-		display: inline-block;
+	.sidebar {
 		position: relative;
 		top: 0;
 		left: 0;
@@ -166,8 +170,7 @@ body{
 		background-size:cover;
 	}
 
-	.stock-card {
-		display: inline-block;
+	.sidebar {
 		position: relative;
 		top: 0;
 		left: 0;
