@@ -117,10 +117,26 @@ body{
 	body{
 		background-size:cover;
 	}
+
+	.stock-card {
+		display: inline-block;
+		position: relative;
+		left: 0;
+		right: 0;
+		width: 100%;
+	}
 }
 
 @media screen and (max-width:640px){
 	body{
 		background-size:cover;
+	}
+
+	.stock-card {
+		display: inline-block;
+		position: relative;
+		left: 0;
+		right: 0;
+		width: 100%;
 	}
 }
