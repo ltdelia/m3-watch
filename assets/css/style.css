@@ -2,7 +2,7 @@ body{
 	background: linear-gradient(
 		rgba(66,189,185,0.45),
 		rgba(66,189,185,0.45)
-	),url(img/training.jpg);
+	),url('../img/training.jpg');
 	background-size: cover;
 	background-position-x: center;
 	color: white;
