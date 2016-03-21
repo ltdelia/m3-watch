@@ -104,6 +104,9 @@ function getPrice() {
       $('#query').text(stockInfo.input);
       $('#for').text("for ");
 
+      // Search is successful
+      getArticles();
+
       // Format timestamp
       var time = moment(new Date(data.Timestamp));
       var userTimezone = moment.tz.guess();

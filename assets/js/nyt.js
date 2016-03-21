@@ -1,188 +1,155 @@
-$(document).ready(function(){
+var article = {
+  number: "",
+  headline: "",
+  byline: "",
+  preview: "",
+  date: "",
+  link: ""
+};
 
-//var searchTerm = $('.searchterm').val().clone();
+function getArticles() {
 
-$("#search").click(function search(){
+  console.log("Searching for articles");
 
-    $('#results').empty();
-	  
-	  var searchTerm = $(".searchterm").val();
-    var searchTermCall = "q=" + searchTerm;
+  $('#articles').empty();
+  
+  var searchTerm = stockInfo.input // $('#search').val().trim();
+  var searchTermCall = "q=" + searchTerm;
 
-    var limit = $("#limit").val();
+  // recent(searchTerm, startYear, endYear);
 
-    var startYear = $("#startYear").val();
-    var startYear = "1994";
-    var startYearCall = "&begin_date=" + startYear + "0000";
+  var key = "1f7c7f95b1c4310e875bb121e74ccb33:15:74629295";
+  var keyCall = "&api-key=" + key;
 
-    var endYear = "2016";
-    //var endMonth = 03;
-    var endYearCall = "&end_date=" + endYear + "0000";
+  var urlBase = "http://api.nytimes.com/svc/search/v2/articlesearch.json?";
+  var urlFinal = urlBase + searchTermCall + keyCall;
+  
+  var keyarr = [];
+  var uniquekeyarr = [];
+  
+  $.ajax({url: urlFinal, method: 'GET'}).done(function(response) {
 
-    recent(searchTerm, startYear, endYear);
+    // console.log(urlFinal);
+    // console.log(response);
 
-    if (startYear == "") {
-      startYearCall = "";
+    var limit = 5; 
+    for (var i = 0; i < limit; i++) {
+
+      article.number = i + 1;
+      console.log(article.number);
+
+      article.headline = response.response.docs[i].headline.main;
+      console.log(article.headline);
+
+      article.byline = response.response.docs[i].byline.original;
+      console.log(article.byline);
+
+      article.preview = response.response.docs[i].lead_paragraph;
+      console.log("preview: " + article.preview);
+
+      article.datebef = response.response.docs[i].pub_date;
+      article.date = moment(article.datebef).format('MMMM D, YYYY');
+      console.log(article.date);
+
+      article.link = response.response.docs[i].web_url;
+      console.log(article.link);
+
+      for (var j = 0; j < response.response.docs[i].keywords.length; j++) {
+        article.keyword = response.response.docs[i].keywords[j].value;
+        console.log(article.keyword);
+        keyarr.push(article.keyword);
+        $.each(keyarr, function(i, el){
+          if($.inArray(el, uniquekeyarr) === -1) uniquekeyarr.push(el);
+        });
+        console.log(uniquekeyarr);
+      }
+      displayArticles();
     }
+    // displayKeywords();
+  });
+};
 
-    if (endYear == "") {
-      endYearCall = "";
-    }
+// var ARRR = new Firebase("group-finance.firebaseIO.com");
 
-    if (limit == "") {
-      limit = 5; // default
-    }
+// function recent(var1, var2, var3){
+// 	ARRR.push({searchterm: var1, startYear: var2, endYear: var3})
+// }
 
-    var key = "1f7c7f95b1c4310e875bb121e74ccb33:15:74629295";
-    var keyCall = "&api-key=" + key;
+//   var recentcard = $("<div class='card article-card z-depth-3'>");
+//   var recenttitle = $("<span class='card-title keytitle'> Recent Searches </span>");
+//   var recentinside = $("<div class='card-content black-text rectext'>");
+//   recentinside.append(recenttitle);
 
-    var urlBase = "http://api.nytimes.com/svc/search/v2/articlesearch.json?";
-    var urlFinal = urlBase + searchTermCall + startYearCall + endYearCall + keyCall;
+// ARRR.on("child_added", function(snapshot){
+// function test() {
+//   alert("Yoo");
+// }
+// 	var info = snapshot.val();
+// 	var search = "<a href='javascript:void(0)' onclick='test()'>" + info.searchterm + "</a>";
 
-    var result = {
-      number: "",
-      headline: "",
-      byline: "",
-      preview: "",
-      date: "",
-      link: ""
-    }
+//   recentinside.append("<br>" + search);
+//   recentcard.append(recentinside);
+//   $("#recent").append(recentcard);
+// });
+
+// $(".clickable-row").click(function() {
+// 	search();
+// });
+
+// $("#ClearButton").click(function(){
+// 	$(".results").empty();  
+// });
+
+
+function displayArticles() {
     
-    var keyarr = [];
-    var uniquekeyarr = [];
-    
-    function displayResult() {
-      
-      var div = $("<div class='card artcard z-depth-2'>");
-      var divinside = $("<div class='card-content black-text'>");
-      var divaction = $("<div class='card-action'>");
+  var div = $("<div class='card article-card z-depth-2'>");
+  var divinside = $("<div class='card-content black-text'>");
+  var divaction = $("<div class='card-action'>");
 
-      var spanNumber = $('<span>');
-      spanNumber.addClass('label label-primary');
-      spanNumber.text(result.number);
+  var spanNumber = $('<span>');
+  spanNumber.addClass('label label-primary');
+  spanNumber.text(article.number);
 
-      var header = $("<span class='card-title'> " + result.headline + "</span>");
-      header.text(result.headline);
+  var header = $("<span class='card-title'> " + article.headline + "</span>");
+  header.text(article.headline);
 
-      var contentByline = $("<p class='nytext'>");
-      contentByline.text(result.byline);
+  var contentByline = $("<p class='nytext'>");
+  contentByline.text(article.byline);
 
-      var contentSection = $("<p class='nytext'>");
-      contentSection.text(result.preview);
+  var contentSection = $("<p class='nytext'>");
+  contentSection.text(article.preview);
 
-      var contentDate = $("<p class='nytext'>");
-      contentDate.text(result.date);
+  var contentDate = $("<p class='nytext'>");
+  contentDate.text(article.date);
 
-      var contentLink = $("<a href = " + result.link + " + " + "target='_blank'> Read More </a>");
-      contentLink.text('Read More')
+  var contentLink = $("<a href = " + article.link + " + " + "target='_blank'> Read More </a>");
+  contentLink.text('Read More')
 
-      div.append(divinside).append(divaction);
-      divinside.append(contentDate).append(header).append(contentByline).append(contentSection);
-      divaction.append(contentLink);
+  div.append(divinside).append(divaction);
+  divinside.append(contentDate).append(header).append(contentByline).append(contentSection);
+  divaction.append(contentLink);
 
-      $('#results').append(div);
-      $('#recent').animate({opacity: 0.85});
+  $('#articles').append(div);
+  // $('#recent').animate({opacity: 0.85});
+};
 
-    }
+function displayKeywords() {
 
-    function displayKey() {
+  $(keydiv).empty();
 
-      $(keydiv).empty();
+  var keydiv = $("<div class='card article-card z-depth-2'>");
+  var keydivinside = $("<div class='card-content black-text'>");
+  var keydivtitle = $("<span class='card-title keytitle'> Keywords </span>")
+  var contentKeyword = $("<p class='nytext'>");
+  var keystring = uniquekeyarr.toString();
+  contentKeyword.text(keystring);
 
-      var keydiv = $("<div class='card artcard z-depth-2'>");
-      var keydivinside = $("<div class='card-content black-text'>");
-      var keydivtitle = $("<span class='card-title keytitle'> Keywords </span>")
-      var contentKeyword = $("<p class='nytext'>");
-      var keystring = uniquekeyarr.toString();
-      contentKeyword.text(keystring);
+  $('#keywords').animate({opacity: 0.85});
+  keydivinside.append(keydivtitle).append(contentKeyword);
+  keydiv.append(keydivinside);
+  $('#keywords').append(keydiv);
+  // $('#news').prepend("<h4 class='nytitle'>Top News Stories for " + searchTerm + "</h4>");
 
-      $('#keyword').animate({opacity: 0.85});
-      keydivinside.append(keydivtitle).append(contentKeyword);
-      keydiv.append(keydivinside);
-      $('#keyword').append(keydiv);
-      $('#results').prepend("<h4 class='nytitle'>Top News Stories for " + searchTerm + "</h4>");
+};
 
-    }
-
-    function apiCall() {
-
-      $.ajax({url: urlFinal, method: 'GET'}).done(function(response) {
-
-        console.log(urlFinal);
-        console.log(response);
-
-        limit = 5; 
-          for (var i = 0; i < limit; i++) {
-
-            result.number = i + 1;
-            console.log(result.number);
-
-            result.headline = response.response.docs[i].headline.main;
-            console.log(result.headline);
-
-            result.byline = response.response.docs[i].byline.original;
-            console.log(result.byline);
-
-            result.preview = response.response.docs[i].lead_paragraph;
-            console.log("preview: " + result.preview);
-
-            result.datebef = response.response.docs[i].pub_date;
-            result.date = moment(result.datebef).format('MMMM D, YYYY');
-            console.log(result.date);
-
-            result.link = response.response.docs[i].web_url;
-            console.log(result.link);
-
-            for (var j = 0; j < response.response.docs[i].keywords.length; j++) {
-              
-              result.keyword = response.response.docs[i].keywords[j].value;
-              console.log(result.keyword);
-              keyarr.push(result.keyword);
-              $.each(keyarr, function(i, el){
-                if($.inArray(el, uniquekeyarr) === -1) uniquekeyarr.push(el);
-              });
-              console.log(uniquekeyarr);
-            }
-            displayResult();
-          }
-          displayKey();
-      });
-    }
-
-    apiCall();
-});
-
-    var ARRR = new Firebase("group-finance.firebaseIO.com");
-
-    function recent(var1, var2, var3){
-    	ARRR.push({searchterm: var1, startYear: var2, endYear: var3})
-    }
-
-      var recentcard = $("<div class='card artcard z-depth-3'>");
-      var recenttitle = $("<span class='card-title keytitle'> Recent Searches </span>");
-      var recentinside = $("<div class='card-content black-text rectext'>");
-      recentinside.append(recenttitle);
-
-    ARRR.on("child_added", function(snapshot){
-    function test() {
-      alert("Yoo");
-    }
-    	var info = snapshot.val();
-    	var search = "<a href='javascript:void(0)' onclick='test()'>" + info.searchterm + "</a>";
-
-      recentinside.append("<br>" + search);
-      recentcard.append(recentinside);
-      $("#recent").append(recentcard);
-    });
-
-$(".clickable-row").click(function() {
-	search();
-});
-
-$("#ClearButton").click(function(){
-	$(".results").empty();  
-});
-
-return false;
-
-})

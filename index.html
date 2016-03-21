@@ -52,11 +52,14 @@
 
   <!-- Search Results -->
 
+  
+
   <div class="main-content">
     <div class="row">
       <div class="col s12 m12 l12">
 
-        <!-- Stocks -->
+        <!-- Stocks ### KEEP ON TOP -->
+
         <div class="card stock-card">
           <div class="card-content black-text stock-info">
 
@@ -79,14 +82,23 @@
 
         <!-- Sidebar -->
 
-        <div id="sidebar">
+        <div class="sidebar">
+          <div id="keywords"></div>
+          <div id="recent"></div>
         </div>
 
-        <!-- Articles -->
+        <div class="results">
 
-        <div id="results">
-          <h1 id="status"> </h1>
-          <span id="for"> </span> <span id="query"></span>
+          <!-- Call Status -->
+
+          <h3 id="status"></h3>
+          <span id="for"></span> <span id="query"></span>
+
+          <!-- Articles -->
+
+          <div id="articles">
+          </div>
+
         </div>
 
       </div>
@@ -107,9 +119,9 @@
   <!-- Compiled and minified JavaScript -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.5/js/materialize.min.js"></script>
   
+  <script src="assets/js/nyt.js"></script>
   <script src="assets/js/stocks.js"></script>
   <script src="assets/js/app.js"></script>
-  <!-- <script src="assets/js/nyt.js"></script> -->
   
 </body>
 </html>

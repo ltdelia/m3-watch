@@ -3,6 +3,7 @@ body{
 		rgba(66,189,185,0.45),
 		rgba(66,189,185,0.45)
 	),url('../img/training.jpg');
+	background-attachment: fixed;
 	background-size: cover;
 	background-position-x: center;
 	color: white;
@@ -51,17 +52,20 @@ body{
 }
 
 .stock-card {
-	position: absolute;
-  right: 23px;
-  top: 23px;
-  z-index: 998;
+	position: fixed;
+  right: 30px;
+  top: 90px;
+  /*z-index: 998;*/
+  width: 420px;
+  overflow: hidden;
 }
 
 /*NYT Article Results*/
 
-.artcard{
-	opacity:0.75;
+.article-card {
+	opacity: 0.75;
 	padding: 20px;
+	width: 560px;
 }
 
 .nytext{
@@ -107,9 +111,22 @@ body{
 
 /*Media Queries*/
 
-@media screen and (max-width:980px){
+@media screen and (max-width:980px),{
 	body{
 		background-size:cover;
+	}
+
+	.stock-card {
+		display: inline-block;
+		position: relative;
+		top: 0;
+		left: 0;
+		right: 0;
+		width: 100%;
+	}
+
+	.article-card {
+		width: 100%;
 	}
 }
 
@@ -121,8 +138,13 @@ body{
 	.stock-card {
 		display: inline-block;
 		position: relative;
+		top: 0;
 		left: 0;
 		right: 0;
+		width: 100%;
+	}
+
+	.article-card {
 		width: 100%;
 	}
 }
@@ -135,8 +157,13 @@ body{
 	.stock-card {
 		display: inline-block;
 		position: relative;
+		top: 0;
 		left: 0;
 		right: 0;
+		width: 100%;
+	}
+
+	.article-card {
 		width: 100%;
 	}
 }
