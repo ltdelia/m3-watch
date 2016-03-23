@@ -14,8 +14,12 @@ function firebase(){
 
 	var info = snapshot.val();
 
-	$(".bro").append("<a class='waves-effect waves-light btn'>" + info.searchterm + "</a>");
+	$(".bro").append("<a class='waves-effect waves-light btn bot'>" + info.searchterm + "</a>");
 	console.log(info);
 	});
 
+	$('.bot').on("click", function() {
+		stockInfo.input = $('.bot').val().trim();
+		search();
+	});
 }
