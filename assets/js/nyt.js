@@ -73,39 +73,9 @@ function getArticles() {
     console.log(keyUniqueArr);
     displayKeywords();
   });
+  $(".bro").empty();
+  firebase();
 };
-
-// var ARRR = new Firebase("group-finance.firebaseIO.com");
-
-// function recent(var1, var2, var3){
-// 	ARRR.push({searchterm: var1, startYear: var2, endYear: var3})
-// }
-
-//   var recentcard = $("<div class='card article-card z-depth-3'>");
-//   var recenttitle = $("<span class='card-title keytitle'> Recent Searches </span>");
-//   var recentinside = $("<div class='card-content black-text rectext'>");
-//   recentinside.append(recenttitle);
-
-// ARRR.on("child_added", function(snapshot){
-// function test() {
-//   alert("Yoo");
-// }
-// 	var info = snapshot.val();
-// 	var search = "<a href='javascript:void(0)' onclick='test()'>" + info.searchterm + "</a>";
-
-//   recentinside.append("<br>" + search);
-//   recentcard.append(recentinside);
-//   $("#recent").append(recentcard);
-// });
-
-// $(".clickable-row").click(function() {
-// 	search();
-// });
-
-// $("#ClearButton").click(function(){
-// 	$(".results").empty();  
-// });
-
 
 function displayArticles() {
   var div = $('<div>').addClass('card article-card');
@@ -132,6 +102,8 @@ function displayArticles() {
   divaction.append(contentLink);
 
   $('#articles').append(div);
+  $('.article-card').animate({opacity: 0.95}, 500);
+  $('.page-footer').animate({opacity: 1.0}, 500);
 };
 
 function displayKeywords() {
