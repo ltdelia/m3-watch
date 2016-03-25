@@ -57,7 +57,7 @@ function getSymbol() {
     crossdomain:true
   }).done(function(data) {
 
-    console.log(data);
+    // console.log(data);
 
     if (data.ResultSet.Result.length <= 0) {
       console.log("fail, no company");
@@ -109,7 +109,7 @@ function getPrice() {
     crossdomain: true,
   }).done(function(data) {
 
-    console.log(data);
+    // console.log(data);
 
     if (data.Status !== "SUCCESS") {
 
