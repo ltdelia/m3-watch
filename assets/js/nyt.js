@@ -138,6 +138,7 @@ function displayArticles() {
   $('#articles').append(div);
   $('.article-card').animate({opacity: 0.95}, 500);
   $('.page-footer').animate({opacity: 1.0}, 500);
+
 };
 
 function displayKeywords() {
@@ -150,9 +151,3 @@ function displayKeywords() {
     };
   };
 };
-
-$(document).ready(function(){
-  $('.collapsible').collapsible({
-    accordion : false // A setting that changes the collapsible behavior to expandable instead of the default accordion style
-  });
-});

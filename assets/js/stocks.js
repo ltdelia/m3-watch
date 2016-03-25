@@ -15,13 +15,13 @@ var stockInfo = {
 //   search();
 // };
 
-function search() {
+function search(input) {
 
   // Show HTML for results
   $('.main-content').show();
 
   // Get user string input
-  stockInfo.input = $('#search').val().trim();
+  stockInfo.input = input;
   console.log("User searched for: " + stockInfo.input);
 
   // Clear input

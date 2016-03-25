@@ -27,8 +27,11 @@ $(document).ready(function(){
   // Run initial api calls
 
 	document.getElementById("searchbar").onsubmit = function() {
+
+    var searchterm = $('#search').val().trim();
+
 		fixed();
-		search();
+		search(searchterm);
 	};
 
 	function fixed() {
