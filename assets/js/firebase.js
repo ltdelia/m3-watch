@@ -28,7 +28,7 @@ ref.on('value',function(snapshot) {
 	list.sort(function(a,b) {
 		return parseFloat(b.count) - parseFloat(a.count);
 	});
-	console.log(list);
+	// console.log(list);
 
 	// Display
 	displayPopular();
@@ -103,16 +103,15 @@ function displayPopular() {
 			.text(symbol)
 			.attr('id',symbol);
 		$('.bro').append(item);
-		console.log("Display " + symbol);
+
+		// Register click event
+		// Use ID so it doesn't loop
+		$('#' + symbol).on('click', function() {
+			console.log('Reload');
+			var input = $(this).attr('id');
+			search(input);
+		});
+
+		// console.log("Display " + symbol);
 	}
 }
-
-// Reload not working yet
-
-// $(document).ready(function() {
-// 	$('.bot').click(function() {
-// 		console.log('Reload');
-// 		var input = $(this).attr('id');
-// 		search(input);
-// 	});
-// });
