@@ -21,7 +21,7 @@
   <!-- Import Firebase -->
   <script src="https://cdn.firebase.com/js/client/2.4.1/firebase.js"></script>
 
-  <title>Company Lookup</title>
+  <title>m3Watch</title>
 
 </head>
 <body>
@@ -32,7 +32,7 @@
     
     <!-- Header -->
     <div class="header row col s12">
-      <h1 class="center-align">Market Watch</h1>
+    <h1 class="center-align">m<span style="vertical-align: super; font-size: 32px">3</span>Watch</h1>
       <p class="center-align">Get financial news and market data about any company.</p>
     </div> 
 
@@ -41,8 +41,9 @@
       <div class="nav-wrapper teal darken-1">
           <form id="searchbar" action="javascript:void(0);">
             <div class="input-field">
-                <input id="search" type="search" placeholder="Search" required>
+                <input id="search" type="search" placeholder="Search for a company" required>
                 <label for="search"><i class="material-icons">search</i></label>
+                <i class="material-icons" id="clearinput">close</i>
             </div>
           </form>
       </div>
@@ -99,6 +100,8 @@
 
         </div>
 
+        <!-- Search Results -->
+
         <div class="results">
 
           <!-- Call Status -->
@@ -113,40 +116,28 @@
 
         </div>
 
-        
-
-        <!-- Recent searches -->
-
       </div>
     </div>
 
     <!-- Footer -->
     
-<!--     <footer class="page-footer">
+    <!-- Footer -->
+    
+    <footer class="page-footer teal darken-3">
       <div class="container">
         <div class="row">
-          <div class="col l6 s12">
-            <h5 class="white-text">Footer Content</h5>
-            <p class="grey-text text-lighten-4">You can use rows and columns here to organize your footer content.</p>
-          </div>
-          <div class="col l4 offset-l2 s12">
-            <h5 class="white-text">Links</h5>
-            <ul>
-              <li><a class="grey-text text-lighten-3" href="#!">Link 1</a></li>
-              <li><a class="grey-text text-lighten-3" href="#!">Link 2</a></li>
-              <li><a class="grey-text text-lighten-3" href="#!">Link 3</a></li>
-              <li><a class="grey-text text-lighten-3" href="#!">Link 4</a></li>
-            </ul>
+          <div class="col l12 s12">
+            <h5 class="white-text left-align">Recent Searches</h5>
+            <div class="bro left-align"></div>
           </div>
         </div>
       </div>
-      <div class="footer-copyright">
+      <div class="footer-copyright left-align">
         <div class="container">
-        © 2014 Copyright Text
-        <a class="grey-text text-lighten-4 right" href="#!">More Links</a>
+        &copy; 2016 Rutgers Coding Bootcamp
         </div>
       </div>
-    </footer> -->
+    </footer>
 
   </div>
 
@@ -163,9 +154,11 @@
   <!-- Compiled and minified JavaScript -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.5/js/materialize.min.js"></script>
   
+  <!-- Do not change order -->
   <script src="assets/js/nyt.js"></script>
   <script src="assets/js/stocks.js"></script>
   <script src="assets/js/app.js"></script>
+  <script src="assets/js/firebase.js"></script>
   
 </body>
 </html>
