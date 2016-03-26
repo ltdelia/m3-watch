@@ -144,30 +144,6 @@ footer {
 	overflow: auto;
 }
 
-.rectext{
-	color: black;
-	font-size: 100%;
-	overflow: auto;
-}
-
-.row{
-	margin: 20px;
-}
-
-#recent{
-	opacity: 0.0;
-}
-
-#sidetitle{
-	color: black;
-	text-align: center;
-	font-size: 215%;
-}
-
-.tcss{
-	color: black;
-}
-
 /*Media Queries*/
 
 @media screen and (max-width: 989px){

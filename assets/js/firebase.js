@@ -18,10 +18,6 @@ ref.on('value',function(snapshot) {
 			count:childSnapshot.val()
 		});
 
-
-		// Display each
-		// displayRecent(childSnapshot.key());
-
 	});
 
 	// Sort by descending count
