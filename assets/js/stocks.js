@@ -19,6 +19,7 @@ function search(input) {
 
   // Show HTML for results
   $('.main-content').show();
+  $('footer').show();
 
   // Get user string input
   stockInfo.input = input;
