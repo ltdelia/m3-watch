@@ -15,5 +15,4 @@ M3-Watch is a a mobile-ready market data and financial news research tool. Built
 http://m3-watch.herokuapp.com/
 
 ### Credits
-Created for Rutgers Coding Bootcamp 2016.
-Design + Code by Jasmine Li, Nate Hawley III, Louis Delia, and Michael Negron.
+Created for Rutgers Coding Bootcamp 2016
