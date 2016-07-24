@@ -29,7 +29,7 @@ function getArticles() {
   $.ajax({url: urlFinal, method: 'GET'}).done(function(response) {
 
     // console.log(urlFinal);
-    console.log(response);
+    // console.log(response);
 
     var limit = 5; 
 
@@ -100,7 +100,7 @@ function getArticles() {
 
     };
     // Append keywords to div
-    console.log(keyUniqueArr);
+    // console.log(keyUniqueArr);
     displayKeywords();
   });
   $(".bro").empty();
@@ -138,6 +138,7 @@ function displayArticles() {
   $('#articles').append(div);
   $('.article-card').animate({opacity: 0.95}, 500);
   $('.page-footer').animate({opacity: 1.0}, 500);
+
 };
 
 function displayKeywords() {
@@ -150,9 +151,3 @@ function displayKeywords() {
     };
   };
 };
-
-$(document).ready(function(){
-  $('.collapsible').collapsible({
-    accordion : false // A setting that changes the collapsible behavior to expandable instead of the default accordion style
-  });
-});

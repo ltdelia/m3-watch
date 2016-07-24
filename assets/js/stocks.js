@@ -15,13 +15,14 @@ var stockInfo = {
 //   search();
 // };
 
-function search() {
+function search(input) {
 
   // Show HTML for results
   $('.main-content').show();
+  $('footer').show();
 
   // Get user string input
-  stockInfo.input = $('#search').val().trim();
+  stockInfo.input = input;
   console.log("User searched for: " + stockInfo.input);
 
   // Clear input
@@ -57,7 +58,7 @@ function getSymbol() {
     crossdomain:true
   }).done(function(data) {
 
-    console.log(data);
+    // console.log(data);
 
     if (data.ResultSet.Result.length <= 0) {
       console.log("fail, no company");
@@ -109,7 +110,7 @@ function getPrice() {
     crossdomain: true,
   }).done(function(data) {
 
-    console.log(data);
+    // console.log(data);
 
     if (data.Status !== "SUCCESS") {
 
