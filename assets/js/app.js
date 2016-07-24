@@ -1,9 +1,11 @@
 $(document).ready(function(){
 
-	document.getElementById("searchbar").onsubmit = function() {
-		fixed();
-		search();
-	};
+	$(document).keyup(function(event) {
+		if(event.keyCode == 13){
+			fixed();
+			search();
+		}
+	});
 
 	function fixed() {
 		// console.log("Move search bar to top");
