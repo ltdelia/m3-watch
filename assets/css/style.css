@@ -9,6 +9,22 @@ body{
 	color: white;
 }
 
+/*Sticky Footer*/
+
+body {
+  display: flex;
+  min-height: 100vh;
+  flex-direction: column;
+}
+
+main {
+  flex: 1 0 auto;
+}
+
+footer {
+	display: none;
+}
+
 /*Landing Page*/
 
 .land_content {
@@ -142,30 +158,6 @@ footer {
 	font-size: 100%;
 	padding-top: 15px;
 	overflow: auto;
-}
-
-.rectext{
-	color: black;
-	font-size: 100%;
-	overflow: auto;
-}
-
-.row{
-	margin: 20px;
-}
-
-#recent{
-	opacity: 0.0;
-}
-
-#sidetitle{
-	color: black;
-	text-align: center;
-	font-size: 215%;
-}
-
-.tcss{
-	color: black;
 }
 
 /*Media Queries*/

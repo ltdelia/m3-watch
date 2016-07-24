@@ -1,31 +1,34 @@
 var ref = new Firebase("https://ljj-testdata.firebaseio.com/searchData/");
 
-var list = [];
+var list = []; // Where the data will live locally
 
+// ###
 
-// How to order by value of child???
-ref.once('value',function(snapshot) {
+ref.on('value',function(snapshot) {
+
+	// Reset array
+	list = [];
+
+	// Download all data into array
 
 	snapshot.forEach(function(childSnapshot) {
-
-		// Download all data into array
 
 		list.push({
 			symbol:childSnapshot.key(),
 			count:childSnapshot.val()
 		});
 
-
-		// Display each
-		// displayRecent(childSnapshot.key());
-
 	});
 
-	// Sort by top count
-	// Display top 5
-	list.sort();
-	console.log(list);
-	// console.log(list[0].symbol);
+	// Sort by descending count
+	list.sort(function(a,b) {
+		return parseFloat(b.count) - parseFloat(a.count);
+	});
+	// console.log(list);
+
+	// Display
+	displayPopular();
+
 });
 
 function firebase() {
@@ -39,70 +42,72 @@ function recent(input) {
 
 	// If not in array, push as new
 
-	var existing = false;
+	// console.log(JSON.stringify(list));
+	// console.log(JSON.stringify(list).indexOf(input));
 
-	for (var i = 0; i < list.length && !existing; i++) {
+	if (JSON.stringify(list).indexOf(input) > -1) {
 
-		if (list[i].symbol === input) {
+		console.log("### Existing");
 
-			existing = true;
+		// Generic function ### DO NOT DELETE!
 
-			console.log("### Existing");
-
-			var count = list[i].count;
-			count++;
-
-			ref.child(input).set(count);
-
-		} else {
-
-			console.log("### New");
-
-			// Push to server data
-			ref.child(input).set(1);
-
+		function findIndexByKeyValue(obj, key, value)
+		{
+		    for (var i = 0; i < obj.length; i++) {
+		        if (obj[i][key] == value) {
+		            return i;
+		        }
+		    }
+		    return null;
 		}
+
+		// Find count
+		var index = findIndexByKeyValue(list,'symbol',input);
+		var count = list[index].count;
+		// console.log(findIndexByKeyValue(list,'symbol',input));
+		// console.log(count);
+
+		// Increase count
+		count++;
+
+		// Update data
+		ref.child(input).set(count);
+
+	} else {
+
+		console.log("### New");
+
+		// Push to server data
+		ref.child(input).set(1);
+
 	}
 } //OK
 
-ref.on('child_added',function(snapshot) {
+function displayPopular() {
 
-	// Add new data to array
-	list.push({
-		symbol:snapshot.key(),
-		count:snapshot.val()
-	});
+	// Clear clear clear
+	$('.bro').empty();
 
-	// Compare to existing list
-	// Reset display
+	// TOP 5 ONLY
+	for (var i = 0; i < 5; i++) {
 
-	// for (i = list.length; i > 0; i++) {
+		var symbol = list[i].symbol;
 
-	// 	if (snapshot.val() > list[i].count) {
+		// Make new button
+		var item = $('<a>')
+			.addClass('waves-effect waves-light btn bot')
+			.text(symbol)
+			.attr('id',symbol);
+		$('.bro').append(item);
 
-	// 		// Clear
-	// 		$('.bro').empty();
+		// Register click event
+		// Use ID so it doesn't loop
+		$('#' + symbol).on('click', function() {
+			console.log('Reload');
+			var input = $(this).attr('id');
+			search(input);
+		});
 
-
-
-	// 	}
-	// }
-
-});
-
-function displayRecent(symbol) {
-	var item = $('<a>')
-		.addClass('waves-effect waves-light btn bot')
-		.text(symbol)
-		.attr('id',symbol);
-	$('.bro').prepend(item);
-	console.log("Display " + symbol);
+		// console.log("Display " + symbol);
+	}
 }
-
-// $(document).ready(function() {
-// 	$('.bot').click(function() {
-// 		console.log('Reload');
-// 		var input = $(this).attr('id');
-// 		search(input);
-// 	});
-// });

@@ -29,7 +29,7 @@ function getArticles() {
   $.ajax({url: urlFinal, method: 'GET'}).done(function(response) {
 
     // console.log(urlFinal);
-    console.log(response);
+    // console.log(response);
 
     var limit = 5; 
 
@@ -100,7 +100,7 @@ function getArticles() {
 
     };
     // Append keywords to div
-    console.log(keyUniqueArr);
+    // console.log(keyUniqueArr);
     displayKeywords();
   });
   $(".bro").empty();
