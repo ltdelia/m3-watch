@@ -37,6 +37,11 @@ footer {
 	padding: 30px;
 }
 
+#search{
+	padding-top:20px;
+	padding-bottom:20px;
+}
+
 /*Stocks*/
 
 #query {
