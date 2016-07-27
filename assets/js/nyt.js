@@ -26,7 +26,7 @@ function getArticles() {
   keyArr = [];
   keyUniqueArr = [];
   
-  $.ajax({url: urlFinal, method: 'GET'}).done(function(response) {
+  $.ajax({url: urlFinal, method: 'GET', datatype: 'jsonp', crossdomain: true}).done(function(response) {
 
     // console.log(urlFinal);
     // console.log(response);
