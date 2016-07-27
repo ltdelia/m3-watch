@@ -56,7 +56,7 @@ function getSymbol() {
     method: 'GET',
     dataType : 'jsonp',
     crossdomain:true
-  }).done(function(data) {
+  }).done(getData = function(data) {
 
     // console.log(data);
 
