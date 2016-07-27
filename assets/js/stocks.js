@@ -49,7 +49,7 @@ function search(input) {
 function getSymbol() {
 
   $.ajax({
-    url: "http://d.yimg.com/aq/autoc?query=" + stockInfo.input + "&region=US&lang=en-US", 
+    url: "http://d.yimg.com/aq/autoc?query=" + stockInfo.input + "&region=US&lang=en-US&callback=?", 
 
     // url: "http://dev.markitondemand.com/MODApis/Api/v2/Lookup/json?input=" + stockInfo.input, // why no work???
 
