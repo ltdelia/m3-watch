@@ -10,11 +10,6 @@ var stockInfo = {
   changePercent: ""
 };
 
-// Initialize search bar ### This is now done in app.js
-// document.getElementById("searchbar").onsubmit = function() {
-//   search();
-// };
-
 function search(input) {
 
   // Show HTML for results

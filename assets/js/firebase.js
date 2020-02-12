@@ -24,32 +24,18 @@ ref.on('value',function(snapshot) {
 	list.sort(function(a,b) {
 		return parseFloat(b.count) - parseFloat(a.count);
 	});
-	// console.log(list);
 
-	// Display
 	displayPopular();
 
 });
 
-function firebase() {
-
-	// Use symbol as unique id
-	
+function firebase() {	
 	recent(stockInfo.symbol);
-} // OK
+} 
 
 function recent(input) {
 
-	// If not in array, push as new
-
-	// console.log(JSON.stringify(list));
-	// console.log(JSON.stringify(list).indexOf(input));
-
 	if (JSON.stringify(list).indexOf(input) > -1) {
-
-		console.log("### Existing");
-
-		// Generic function ### DO NOT DELETE!
 
 		function findIndexByKeyValue(obj, key, value)
 		{
@@ -64,22 +50,14 @@ function recent(input) {
 		// Find count
 		var index = findIndexByKeyValue(list,'symbol',input);
 		var count = list[index].count;
-		// console.log(findIndexByKeyValue(list,'symbol',input));
-		// console.log(count);
-
-		// Increase count
 		count++;
 
 		// Update data
 		ref.child(input).set(count);
 
 	} else {
-
-		console.log("### New");
-
 		// Push to server data
 		ref.child(input).set(1);
-
 	}
 } //OK
 
